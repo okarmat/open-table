@@ -3,7 +3,7 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>Gwent Memory Test</title>
+	<title>Open Table Management</title>
 	<meta name="description" content="JS Memory Game inspired by Gwent">
 	<meta name="keywords" content="javascript, jQuery, game, gwent, memory">
 	<meta name="author" content="MZ">
@@ -11,6 +11,10 @@
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
 	
 	<link rel="stylesheet" href="main.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 	<link href="https://fonts.googleapis.com/css?family=Lobster&amp;subset=latin-ext" rel="stylesheet">
 	
@@ -21,14 +25,19 @@
 
 <body>
 	<div class="control-panel">
-		<button type="button" class="btn btn-success" onclick="addTable()">Add table</button>
-	</div>
-    
-	<div class="restaurant"></div>
+		<button type="button" class="btn btn-primary" onclick="addTable()">Dodaj stolik</button>
+		<button type="button" class="btn btn-success" onclick="save()">Zapisz konfigurację</button>
+		
+	</div>	
+	 
+	<div class="restaurant"></div>	
 
 	<script src="jquery-3.3.1.min.js"></script>
+	<script src="jquery-1.12.4.js"></script>
+	<script src="jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="draggabilly.pkgd.min.js"></script>
-	<script src="management.js"></script>
+	<script src="table-management.js"></script>
 	
 </body>
 </html>

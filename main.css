@@ -35,3 +35,5 @@ body { font-family: sans-serif; }
   z-index: 2; /* above other draggies */
 }
 .table.is-dragging { opacity: 0.7; }
+
+.draggable { width: 30px; height: 30px; padding: 0.5em; border: 2px solid #000000;}
