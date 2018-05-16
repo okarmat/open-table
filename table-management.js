@@ -5,9 +5,9 @@
 	tableId++;
 	var table = {id:tableId, left:0, top:0}
 	tables.push(table);
-	$(".restaurant").append("<div id='"+tableId+"' class='draggable' class='ui-widget-content'></div>");
-	$(".draggable").draggable();	
-    $(".draggable").on( "dragstop", function( event, ui) { 					
+	$(".restaurant").append("<div id='"+tableId+"' class='table' class='ui-widget-content' ondblclick='deleteTable()'></div>");
+	$(".table").draggable();	
+    $(".table").on( "dragstop", function( event, ui) { 					
 		saveTablePosition(Number($(this).attr("id")), ui.position.left, ui.position.top);
 	});	
   }
@@ -19,3 +19,8 @@
 		tables[tableIndex].top = top;
   }
  
+  function deleteTable() {
+	var del = $('#1.table');
+	console.log(del);
+    $(del).remove();		
+  }
