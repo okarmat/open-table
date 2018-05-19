@@ -19,7 +19,7 @@ namespace OpenTable.Controllers
         {
             return View(db.Restaurants.ToList());
         }
-
+        
         // GET: Restaurants/Details/5
         public ActionResult Details(int? id)
         {
