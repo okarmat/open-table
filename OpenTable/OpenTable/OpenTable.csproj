@@ -229,7 +229,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
-    <Compile Include="Controllers\TablesManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,6 +239,10 @@
     <Compile Include="Migrations\201805171900129_changingRelationsBetweenTablesAndRestuarants.cs" />
     <Compile Include="Migrations\201805171900129_changingRelationsBetweenTablesAndRestuarants.Designer.cs">
       <DependentUpon>201805171900129_changingRelationsBetweenTablesAndRestuarants.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805201025580_changingRelationsBetweenTablesAndRestaurants.cs" />
+    <Compile Include="Migrations\201805201025580_changingRelationsBetweenTablesAndRestaurants.Designer.cs">
+      <DependentUpon>201805201025580_changingRelationsBetweenTablesAndRestaurants.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -255,6 +258,7 @@
     <Compile Include="Repositories\TableRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TableManageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -325,7 +329,8 @@
     <Content Include="Views\Tables\Details.cshtml" />
     <Content Include="Views\Tables\Edit.cshtml" />
     <Content Include="Views\Tables\Index.cshtml" />
-    <Content Include="Views\TablesManagement\TablesManagement.cshtml" />
+    <Content Include="Views\TablesManagement\Manage.cshtml" />
+    <Content Include="Views\Restaurants\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -349,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805171900129_changingRelationsBetweenTablesAndRestuarants.resx">
       <DependentUpon>201805171900129_changingRelationsBetweenTablesAndRestuarants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805201025580_changingRelationsBetweenTablesAndRestaurants.resx">
+      <DependentUpon>201805201025580_changingRelationsBetweenTablesAndRestaurants.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

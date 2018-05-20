@@ -7,11 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OpenTable.Models;
+using OpenTable.Repositories;
 
 namespace OpenTable.Controllers
 {
     public class RestaurantsController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public RestaurantsController(
+            IUnitOfWork unitOfWork,
+            ITableRepository tableRepository
+            )
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Restaurants
@@ -122,6 +133,24 @@ namespace OpenTable.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Manage(int id)
+        {
+            ViewBag.RestaurantId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveTablesSet(List<Table> tables)
+        {
+            foreach (var table in tables)
+            {
+                _unitOfWork.TableRepository.Add(table);
+            }
+            _unitOfWork.Complete();
+
+            return View();
         }
     }
 }

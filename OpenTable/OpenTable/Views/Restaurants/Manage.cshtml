@@ -15,8 +15,10 @@
         <h4>Restaurant</h4>
         <hr />
 
-        <div class="control-panel">
-            <button type="button" class="btn btn-primary" onclick="addTable()">Dodaj stolik</button>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" class="btn btn-primary" onclick="addTable(@ViewBag.RestaurantId)">Dodaj stolik</button>
+            </div>
         </div>
 
         <div class="restaurant"></div>
