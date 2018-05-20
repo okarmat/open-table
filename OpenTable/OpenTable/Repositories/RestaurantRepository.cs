@@ -19,5 +19,10 @@ namespace OpenTable.Repositories
         {
             return _context.Restaurants.ToList();
         }
+
+        public Restaurant GetById(int id)
+        {
+            return _context.Restaurants.Where(r => r.Id == id).First();
+        }
     }
 }

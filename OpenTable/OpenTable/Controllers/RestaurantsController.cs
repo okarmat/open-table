@@ -150,13 +150,20 @@ namespace OpenTable.Controllers
 
         public ActionResult Manage(int id)
         {
+            var restaurant = _unitOfWork.RestaurantRepository.GetById(id);
+
             ViewBag.RestaurantId = id;
+            ViewBag.RestaurantName = restaurant.Name;
+
             return View();
         }
 
         [HttpPost]
         public ActionResult SaveTablesSet(List<Table> tables)
         {
+            if (tables == null)
+                return View();
+
             foreach (var table in tables)
             {
                 _unitOfWork.TableRepository.Add(table);

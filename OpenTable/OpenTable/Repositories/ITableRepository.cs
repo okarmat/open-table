@@ -11,6 +11,6 @@ namespace OpenTable.Repositories
     {
         void Add(Table table);
         List<Table> GetAll();
-        List<Table> GetByRestaurantId(int restaurantId);
+        Table GetByRestaurantId(int restaurantId);
     }
 }

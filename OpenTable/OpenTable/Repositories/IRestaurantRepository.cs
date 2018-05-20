@@ -10,5 +10,6 @@ namespace OpenTable.Repositories
     public interface IRestaurantRepository
     {
         List<Restaurant> GetAll();
+        Restaurant GetById(int id);
     }
 }
