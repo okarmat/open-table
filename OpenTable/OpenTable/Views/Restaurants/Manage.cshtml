@@ -1,10 +1,10 @@
-﻿@model OpenTable.Models.Restaurant
+﻿@model OpenTable.ViewModels.TableManagementViewModel
 
 @{
     ViewBag.Title = "Table Management";
 }
 
-<h2>@ViewBag.RestaurantName - Table Management</h2>
+<h2>@Html.DisplayFor(m => m.RestaurantName) - Table Management</h2>
 
 
 @using (Html.BeginForm())
@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <button type="button" class="btn btn-primary" onclick="addTable(@ViewBag.RestaurantId)">Add table</button>
+                <button type="button" class="btn btn-primary" onclick="addTable(@Html.DisplayFor(m => m.RestaurantId))">Add table</button>
             </div>
         </div>
 

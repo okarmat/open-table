@@ -152,10 +152,14 @@ namespace OpenTable.Controllers
         {
             var restaurant = _unitOfWork.RestaurantRepository.GetById(id);
 
-            ViewBag.RestaurantId = id;
-            ViewBag.RestaurantName = restaurant.Name;
+            var tableManagementViewModel = new TableManagementViewModel
+            {
+                RestaurantId = id,
+                RestaurantName = restaurant.Name,
+                Tables = restaurant.Tables
+            };
 
-            return View();
+            return View(tableManagementViewModel);
         }
 
         [HttpPost]

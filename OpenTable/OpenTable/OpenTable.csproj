@@ -268,6 +268,7 @@
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\RestaurantsViewModel.cs" />
+    <Compile Include="ViewModels\TableManagementViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
