@@ -9,6 +9,5 @@ namespace OpenTable.ViewModels
     public class RestaurantsViewModel
     {
         public List<Restaurant> Restaurants { get; set; }
-        public List<Table> Tables { get; set; }
     }
 }
