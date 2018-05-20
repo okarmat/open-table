@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace OpenTable.Repositories
 {
-    public interface ITableRepository
+    public interface IRestaurantRepository
     {
-        void Add(Table table);
-        List<Table> GetAll();
-        List<Table> GetByRestaurantId(int restaurantId);
+        List<Restaurant> GetAll();
     }
 }

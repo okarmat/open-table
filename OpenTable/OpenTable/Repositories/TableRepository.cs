@@ -19,5 +19,15 @@ namespace OpenTable.Repositories
         {
             _context.Tables.Add(table);
         }
+
+        public List<Table> GetAll()
+        {
+            return _context.Tables.ToList();
+        }
+
+        public List<Table> GetByRestaurantId(int restaurantId)
+        {
+            return _context.Tables.Where(t => t.RestaurantId == restaurantId).ToList();
+        }
     }
 }

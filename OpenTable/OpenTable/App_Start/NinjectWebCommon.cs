@@ -63,6 +63,7 @@ namespace OpenTable.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<IRestaurantRepository>().To<RestaurantRepository>();
             kernel.Bind<ITableRepository>().To<TableRepository>();
         }        
     }

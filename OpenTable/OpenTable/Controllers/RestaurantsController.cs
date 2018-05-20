@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OpenTable.Models;
 using OpenTable.Repositories;
+using OpenTable.ViewModels;
 
 namespace OpenTable.Controllers
 {
@@ -28,7 +29,19 @@ namespace OpenTable.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-            return View(db.Restaurants.ToList());
+            var tables = _unitOfWork.TableRepository.GetAll();
+            var restaurants = _unitOfWork.RestaurantRepository.GetAll();
+            foreach (var restaurant in restaurants)
+            {
+                restaurant.Tables = tables.Where(t => t.RestaurantId == restaurant.Id).ToList();
+            };
+
+            var restaurantViewModel = new RestaurantsViewModel
+            {
+                Restaurants = restaurants
+            };
+
+            return View(restaurantViewModel);
         }
         
         // GET: Restaurants/Details/5

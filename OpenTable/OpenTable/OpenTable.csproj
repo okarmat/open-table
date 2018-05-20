@@ -244,21 +244,30 @@
     <Compile Include="Migrations\201805201025580_changingRelationsBetweenTablesAndRestaurants.Designer.cs">
       <DependentUpon>201805201025580_changingRelationsBetweenTablesAndRestaurants.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805201116175_setRestaurantNameAsRequiredField.cs" />
+    <Compile Include="Migrations\201805201116175_setRestaurantNameAsRequiredField.Designer.cs">
+      <DependentUpon>201805201116175_setRestaurantNameAsRequiredField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805201128547_addTablesFieldToRestaurant.cs" />
+    <Compile Include="Migrations\201805201128547_addTablesFieldToRestaurant.Designer.cs">
+      <DependentUpon>201805201128547_addTablesFieldToRestaurant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Restaurant.cs" />
-    <Compile Include="Models\RestaurantTablesSet.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRestaurantRepository.cs" />
     <Compile Include="Repositories\ITableRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\RestaurantRepository.cs" />
     <Compile Include="Repositories\TableRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\TableManageViewModels.cs" />
+    <Compile Include="ViewModels\RestaurantsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -324,12 +333,6 @@
     <Content Include="Views\Restaurants\Details.cshtml" />
     <Content Include="Views\Restaurants\Edit.cshtml" />
     <Content Include="Views\Restaurants\Index.cshtml" />
-    <Content Include="Views\Tables\Create.cshtml" />
-    <Content Include="Views\Tables\Delete.cshtml" />
-    <Content Include="Views\Tables\Details.cshtml" />
-    <Content Include="Views\Tables\Edit.cshtml" />
-    <Content Include="Views\Tables\Index.cshtml" />
-    <Content Include="Views\TablesManagement\Manage.cshtml" />
     <Content Include="Views\Restaurants\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +360,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805201025580_changingRelationsBetweenTablesAndRestaurants.resx">
       <DependentUpon>201805201025580_changingRelationsBetweenTablesAndRestaurants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805201116175_setRestaurantNameAsRequiredField.resx">
+      <DependentUpon>201805201116175_setRestaurantNameAsRequiredField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805201128547_addTablesFieldToRestaurant.resx">
+      <DependentUpon>201805201128547_addTablesFieldToRestaurant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

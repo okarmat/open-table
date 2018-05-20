@@ -11,11 +11,13 @@ namespace OpenTable.Repositories
         private readonly ApplicationDbContext _context;
 
         public ITableRepository TableRepository { get; set; }
+        public IRestaurantRepository RestaurantRepository { get; set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             TableRepository = new TableRepository(_context);
+            RestaurantRepository = new RestaurantRepository(_context);
         }
 
         public void Complete()

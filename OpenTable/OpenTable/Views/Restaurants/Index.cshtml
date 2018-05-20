@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OpenTable.Models.Restaurant>
+﻿@model OpenTable.ViewModels.RestaurantsViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,15 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Restaurants.FirstOrDefault().Name)
         </th>
+        <th>
+            Tables
+        </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Restaurants) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Name)           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tables.Count)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

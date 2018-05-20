@@ -9,6 +9,7 @@ namespace OpenTable.Repositories
     public interface IUnitOfWork
     {
         ITableRepository TableRepository { get; }
+        IRestaurantRepository RestaurantRepository { get; set; }
         
         void Complete();
     }
