@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using OpenTable.Models;
 using OpenTable.Repositories;
 using OpenTable.ViewModels;
@@ -151,14 +152,22 @@ namespace OpenTable.Controllers
         public ActionResult Manage(int id)
         {
             var restaurant = _unitOfWork.RestaurantRepository.GetById(id);
+            restaurant.Tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurant.Id);
+            var tablesJson = "[]";
+            var tablesMaxId = restaurant.Tables.Count == 0 ? 1 : restaurant.Tables.Select(t => t.Id).Max() + 1;
+
+            if (restaurant.Tables.Any())
+                tablesJson = new JavaScriptSerializer()
+                    .Serialize(restaurant.Tables
+                    .Select(s => new { s.Id, s.Left, s.Top, s.RestaurantId }));
 
             var tableManagementViewModel = new TableManagementViewModel
             {
                 RestaurantId = id,
                 RestaurantName = restaurant.Name,
-                Tables = restaurant.Tables
+                TablesMaxId = tablesMaxId,
+                Tables = tablesJson
             };
-
             return View(tableManagementViewModel);
         }
 
@@ -170,7 +179,11 @@ namespace OpenTable.Controllers
 
             foreach (var table in tables)
             {
-                _unitOfWork.TableRepository.Add(table);
+                var tableFromDatabase = _unitOfWork.TableRepository.GetById(table.Id);
+                if (tableFromDatabase == null)
+                    _unitOfWork.TableRepository.Add(table);
+                else
+                    _unitOfWork.TableRepository.Update(table);
             }
             _unitOfWork.Complete();
 

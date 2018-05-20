@@ -25,9 +25,23 @@ namespace OpenTable.Repositories
             return _context.Tables.ToList();
         }
 
-        public Table GetByRestaurantId(int restaurantId)
+        public Table GetById(int id)
         {
-            return _context.Tables.Where(t => t.RestaurantId == restaurantId).First();
+            return _context.Tables.Where(t => t.Id == id).FirstOrDefault();
+        }
+
+        public List<Table> GetByRestaurantId(int restaurantId)
+        {
+            return _context.Tables.Where(t => t.RestaurantId == restaurantId).ToList();
+        }
+
+        public void Update(Table table)
+        {
+            var tableToUpdate = _context.Tables.First(t => t.Id == table.Id && t.RestaurantId == table.RestaurantId);
+            tableToUpdate.Left = table.Left;
+            tableToUpdate.Top = table.Top;
+            _context.Tables.Add(tableToUpdate);
+            _context.Entry(tableToUpdate).State = System.Data.Entity.EntityState.Modified;            
         }
     }
 }

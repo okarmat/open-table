@@ -10,6 +10,7 @@ namespace OpenTable.ViewModels
     {
         public int RestaurantId { get; set; }
         public string RestaurantName { get; set; }
-        public List<Table> Tables { get; set; }
+        public int TablesMaxId { get; set; }
+        public string Tables { get; set; }        
     }
 }
