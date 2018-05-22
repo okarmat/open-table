@@ -30,7 +30,7 @@ namespace OpenTable.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-          var tables = _unitOfWork.TableRepository.GetAll();
+            var tables = db.Tables;
             var restaurants = _unitOfWork.RestaurantRepository.GetAll();
             foreach (var restaurant in restaurants)
             {
@@ -170,12 +170,11 @@ namespace OpenTable.Controllers
             };
             return View(tableManagementViewModel);
         }
-
-        [HttpPost]
-        public ActionResult SaveTablesSet(List<Table> tables)
+        
+        public void SaveTablesSet(List<Table> tables)
         {
             if (tables == null)
-                return View();
+                return;
 
             foreach (var table in tables.Where(t => t != null))
             {
@@ -188,8 +187,6 @@ namespace OpenTable.Controllers
             _unitOfWork.TableRepository.Delete(tables);
 
             _unitOfWork.Complete();
-            
-            return null;
         }
     }
 }
