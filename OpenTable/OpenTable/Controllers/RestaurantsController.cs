@@ -30,7 +30,7 @@ namespace OpenTable.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-            var tables = _unitOfWork.TableRepository.GetAll();
+          var tables = _unitOfWork.TableRepository.GetAll();
             var restaurants = _unitOfWork.RestaurantRepository.GetAll();
             foreach (var restaurant in restaurants)
             {
@@ -177,17 +177,19 @@ namespace OpenTable.Controllers
             if (tables == null)
                 return View();
 
-            foreach (var table in tables)
+            foreach (var table in tables.Where(t => t != null))
             {
                 var tableFromDatabase = _unitOfWork.TableRepository.GetById(table.Id);
                 if (tableFromDatabase == null)
                     _unitOfWork.TableRepository.Add(table);
                 else
-                    _unitOfWork.TableRepository.Update(table);
+                    _unitOfWork.TableRepository.Update(table);                
             }
-            _unitOfWork.Complete();
+            _unitOfWork.TableRepository.Delete(tables);
 
-            return View();
+            _unitOfWork.Complete();
+            
+            return null;
         }
     }
 }

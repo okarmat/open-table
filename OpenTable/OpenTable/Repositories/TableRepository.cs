@@ -43,5 +43,12 @@ namespace OpenTable.Repositories
             _context.Tables.Add(tableToUpdate);
             _context.Entry(tableToUpdate).State = System.Data.Entity.EntityState.Modified;            
         }
+
+        public void Delete(List<Table> tables)
+        {                        
+            var tablesToEraseIds = tables.Where(t => t.Erase == true).Select(t => t.Id).ToList();
+            var tablesToDelte = _context.Tables.Where(t => tablesToEraseIds.Contains(t.Id)).ToList();
+           _context.Tables.RemoveRange(tablesToDelte);
+        }
     }
 }

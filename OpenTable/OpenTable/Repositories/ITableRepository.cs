@@ -14,5 +14,6 @@ namespace OpenTable.Repositories
         Table GetById(int id);
         List<Table> GetByRestaurantId(int restaurantId);
         void Update(Table table);
+        void Delete(List<Table> table);
     }
 }
