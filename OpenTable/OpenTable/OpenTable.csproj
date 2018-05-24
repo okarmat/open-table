@@ -252,11 +252,16 @@
     <Compile Include="Migrations\201805201128547_addTablesFieldToRestaurant.Designer.cs">
       <DependentUpon>201805201128547_addTablesFieldToRestaurant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805222107449_creatingReservationEntity.cs" />
+    <Compile Include="Migrations\201805222107449_creatingReservationEntity.Designer.cs">
+      <DependentUpon>201805222107449_creatingReservationEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -368,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805201128547_addTablesFieldToRestaurant.resx">
       <DependentUpon>201805201128547_addTablesFieldToRestaurant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805222107449_creatingReservationEntity.resx">
+      <DependentUpon>201805222107449_creatingReservationEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

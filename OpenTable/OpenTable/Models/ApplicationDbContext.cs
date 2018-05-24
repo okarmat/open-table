@@ -11,6 +11,7 @@ namespace OpenTable.Models
     {
         public DbSet<Table> Tables { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
