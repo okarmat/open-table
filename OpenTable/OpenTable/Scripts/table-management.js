@@ -1,19 +1,54 @@
 ﻿var tableMaxId = 0
 var tables = [];
+var tablesReserved = [];
 
 function initTableManagementView(initialTableMaxId, initialTables) {
       tableMaxId = initialTableMaxId;
       tables = JSON.parse(initialTables);
 
       tables.forEach(function (element) {
-          $(".restaurant").append("<div id='" + element.Id + "' class='restaurant-table' class='ui-widget-content' ondblclick='deleteTable(event)'></div>");
+          $(".restaurant").append("<div id='" + element.Id + "' class='restaurant-table' class='ui-widget-content'></div>");
           $("#" + element.Id + ".restaurant-table").draggable();
           $("#" + element.Id + ".restaurant-table").css({ 'top': element.Top, 'left': element.Left })
           $(".restaurant-table").on("dragstop", function (event, ui) {
               saveTablePosition(Number($(this).attr("id")), ui.position.left, ui.position.top);
-          });	
-      })
-  }
+          });
+      });     
+}
+
+function initTableReservationView(initialTables) {
+    tables = JSON.parse(initialTables);
+
+    tables.forEach(function (element) {
+        $(".restaurant").append("<div id='" + element.Id + "' class='restaurant-table' class='ui-widget-content'></div>");
+        $("#" + element.Id + ".restaurant-table").draggable();
+        $("#" + element.Id + ".restaurant-table").css({ 'top': element.Top, 'left': element.Left });
+        $("#" + element.Id + ".restaurant-table").click(function () {               
+            var tableIndex = tablesReserved.findIndex(t => t === element.Id);
+            console.log(tableIndex);
+            if (tableIndex === -1) 
+                tablesReserved.push(element.Id);            
+            else
+                tablesReserved = jQuery.grep(element.Id, function (value) {
+                    return value != removeItem;
+                });
+            $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
+        });
+    });
+
+    $(".restaurant-table").draggable("disable");
+}
+
+function reserve(id) {
+    jQuery.ajax({
+        type: "POST",
+        url: "/Reservations/Reserve",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: things = JSON.stringify({ 'tablesReserved': tablesReserved })
+    });
+    window.location = '/Restaurants/Index';
+}
 
   function addTable(restaurantId) {	
     tableMaxId++;
@@ -51,4 +86,4 @@ function initTableManagementView(initialTableMaxId, initialTables) {
               $("#" + element.Id + ".restaurant-table").remove();
           })	
       } 
-  }
+  };

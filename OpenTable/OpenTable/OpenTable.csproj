@@ -227,6 +227,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -256,6 +257,14 @@
     <Compile Include="Migrations\201805222107449_creatingReservationEntity.Designer.cs">
       <DependentUpon>201805222107449_creatingReservationEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805241704033_fixingReservationCyclesOrMultopleCascadePath.cs" />
+    <Compile Include="Migrations\201805241704033_fixingReservationCyclesOrMultopleCascadePath.Designer.cs">
+      <DependentUpon>201805241704033_fixingReservationCyclesOrMultopleCascadePath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805241705316_addReservationTime.cs" />
+    <Compile Include="Migrations\201805241705316_addReservationTime.Designer.cs">
+      <DependentUpon>201805241705316_addReservationTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -272,6 +281,7 @@
     <Compile Include="Repositories\TableRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CreateReservationViewModel.cs" />
     <Compile Include="ViewModels\RestaurantsViewModel.cs" />
     <Compile Include="ViewModels\TableManagementViewModel.cs" />
   </ItemGroup>
@@ -340,6 +350,11 @@
     <Content Include="Views\Restaurants\Edit.cshtml" />
     <Content Include="Views\Restaurants\Index.cshtml" />
     <Content Include="Views\Restaurants\Manage.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -376,6 +391,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805222107449_creatingReservationEntity.resx">
       <DependentUpon>201805222107449_creatingReservationEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805241704033_fixingReservationCyclesOrMultopleCascadePath.resx">
+      <DependentUpon>201805241704033_fixingReservationCyclesOrMultopleCascadePath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805241705316_addReservationTime.resx">
+      <DependentUpon>201805241705316_addReservationTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

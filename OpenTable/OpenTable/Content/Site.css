@@ -54,3 +54,7 @@ textarea {
 .restaurant-table.is-dragging {
     opacity: 0.7;
 }
+
+.reserved-by-me {
+    border: 4px double #4cff00;
+}

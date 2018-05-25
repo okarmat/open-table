@@ -32,6 +32,7 @@
             @Html.DisplayFor(modelItem => item.Tables.Count)
         </td>
         <td>
+            @Html.ActionLink("Reserve table", "Create", "Reservations", new { restaurantId = item.Id }, null) |
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Table Management", "Manage", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
