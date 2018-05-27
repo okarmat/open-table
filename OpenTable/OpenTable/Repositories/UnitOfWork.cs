@@ -12,12 +12,14 @@ namespace OpenTable.Repositories
 
         public ITableRepository TableRepository { get; set; }
         public IRestaurantRepository RestaurantRepository { get; set; }
+        public IReservationRepository ReservationRepository { get; set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             TableRepository = new TableRepository(_context);
             RestaurantRepository = new RestaurantRepository(_context);
+            ReservationRepository = new ReservationRepository(_context);
         }
 
         public void Complete()

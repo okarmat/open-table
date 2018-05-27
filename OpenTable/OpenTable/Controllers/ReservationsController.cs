@@ -152,5 +152,11 @@ namespace OpenTable.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public void Reserve(Reservation reservation)
+        {
+            _unitOfWork.ReservationRepository.Add(reservation);
+            _unitOfWork.Complete();
+        }
     }
 }

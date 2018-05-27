@@ -10,6 +10,7 @@ namespace OpenTable.Repositories
     {
         ITableRepository TableRepository { get; }
         IRestaurantRepository RestaurantRepository { get; set; }
+        IReservationRepository ReservationRepository { get; set; }
         
         void Complete();
     }

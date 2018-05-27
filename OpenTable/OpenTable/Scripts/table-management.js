@@ -5,7 +5,7 @@ var tablesReserved = [];
 function initTableManagementView(initialTableMaxId, initialTables) {
       tableMaxId = initialTableMaxId;
       tables = JSON.parse(initialTables);
-
+    
       tables.forEach(function (element) {
           $(".restaurant").append("<div id='" + element.Id + "' class='restaurant-table' class='ui-widget-content'></div>");
           $("#" + element.Id + ".restaurant-table").draggable();
@@ -13,7 +13,7 @@ function initTableManagementView(initialTableMaxId, initialTables) {
           $(".restaurant-table").on("dragstop", function (event, ui) {
               saveTablePosition(Number($(this).attr("id")), ui.position.left, ui.position.top);
           });
-      });     
+      })   
 }
 
 function initTableReservationView(initialTables) {
@@ -25,7 +25,6 @@ function initTableReservationView(initialTables) {
         $("#" + element.Id + ".restaurant-table").css({ 'top': element.Top, 'left': element.Left });
         $("#" + element.Id + ".restaurant-table").click(function () {               
             var tableIndex = tablesReserved.findIndex(t => t === element.Id);
-            console.log(tableIndex);
             if (tableIndex === -1) 
                 tablesReserved.push(element.Id);            
             else
@@ -39,25 +38,29 @@ function initTableReservationView(initialTables) {
     $(".restaurant-table").draggable("disable");
 }
 
-function reserve(id) {
+function reserve(email, reservationTime) {
+    console.log("sssssssssssss");
+    var tableId = Number($(".reserved-by-me").attr("id"));
+    var reservation = { ReservingPersonEmail: email, ReservationTime: reservationTime, TableId: tableId };
     jQuery.ajax({
         type: "POST",
         url: "/Reservations/Reserve",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: things = JSON.stringify({ 'tablesReserved': tablesReserved })
+        data: things = JSON.stringify({ 'reservation': reservation })
     });
-    window.location = '/Restaurants/Index';
+    
+    //window.location = '/Restaurants/Index';
 }
 
   function addTable(restaurantId) {	
     tableMaxId++;
-    var table = { Id: tableMaxId, RestaurantId: restaurantId, Left:0, Top:0, Erase:false }
+    var table = { Id: tableMaxId, RestaurantId: restaurantId, Left:0, Top:0 }
 	tables.push(table);
     $(".restaurant").append("<div id='" + tableMaxId+"' class='restaurant-table' class='ui-widget-content'></div>");
     $(".restaurant-table").draggable();	
     $(".restaurant-table").on("dragstop", function (event, ui) { 					        
-		saveTablePosition(Number($(this).attr("id")), ui.position.left, ui.position.top);
+        saveTablePosition(Number($(this).attr("id")), ui.position.left, ui.position.top);
 	});	
   }
   
@@ -67,7 +70,7 @@ function reserve(id) {
         tables[tableIndex].Top = top;
   }
 
-  function saveTablesSet() {
+function saveTablesSet() {
       jQuery.ajax({
           type: "POST",
           url: "/Restaurants/SaveTablesSet",
