@@ -57,7 +57,7 @@ namespace OpenTable.Controllers
                 RestaurantId = restaurantId,
                 RestaurantName = restaurant.Name,
                 Tables = tables.ToJson(),
-                ReservationDate = DateTime.Now
+                ReservationDate = DateTime.Now.AddDays(1)
             };
 
             return View(createReservationViewModel);

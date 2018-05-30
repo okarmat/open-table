@@ -9,12 +9,15 @@ namespace OpenTable.Models
     public class Reservation
     {
         public int Id { get; set; }
+
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string ReservingPersonEmail { get; set; }
+
         [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         public DateTime ReservationDate { get; set; }
+
         public int TableId { get; set; }
 
         public Table Table { get; set; }

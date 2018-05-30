@@ -1,6 +1,8 @@
 ﻿using OpenTable.Models;
+using OpenTable.Validations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -14,12 +16,14 @@ namespace OpenTable.ViewModels
 
         public string RestaurantName { get; set; }
 
-        [Required]
+        [Required]        
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [DisplayName("Contact email")]
         public string ReservingPersonEmail { get; set; }
 
         [Required]
-        [Display(Name = "Reservation date")]
+        [DateTimeNextSevenDaysRangeAttributeValidation]
+        [DisplayName("Reservation date")]
         public DateTime ReservationDate { get; set; }
 
         [Required]

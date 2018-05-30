@@ -292,6 +292,7 @@
     <Compile Include="Repositories\TableRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validations\DateTimeNextSevenDaysRangeAttributeValidation.cs" />
     <Compile Include="ViewModels\CreateReservationViewModel.cs" />
     <Compile Include="ViewModels\RestaurantsViewModel.cs" />
     <Compile Include="ViewModels\TableManagementViewModel.cs" />
