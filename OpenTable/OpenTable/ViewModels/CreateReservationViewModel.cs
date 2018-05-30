@@ -9,16 +9,22 @@ namespace OpenTable.ViewModels
 {
     public class CreateReservationViewModel
     {
+
+        public int RestaurantId { get; set; }
+
         public string RestaurantName { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string ReservingPersonEmail { get; set; }
 
         [Required]
         [Display(Name = "Reservation date")]
-        public string ReservationDate { get; set; }
+        public DateTime ReservationDate { get; set; }
 
-        public string Tables { get; set; }                
+        [Required]
+        public int TableId { get; set; }
+
+        public string Tables { get; set; }        
     }
 }

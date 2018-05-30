@@ -18,7 +18,13 @@
     <h4>@Model.RestaurantName</h4>
     <hr />
 
-    @Html.TextBoxFor(model => model.ReservationDate, new { type = "datetime-local" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReservationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.ReservationDate, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local" })
+            @Html.ValidationMessageFor(model => model.ReservationDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -31,21 +37,18 @@
 
     <div class="restaurant"></div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input value="Reserve selected table" class="btn btn-success" onclick="reserve(@Html.DisplayFor(r => r.ReservingPersonEmail),@Html.DisplayFor(r => r.ReservationDate)/>
-        </div>
+    <input id="ReserveBtn" value="Reserve" class="btn btn-success" onclick="reserve()" disabled/>
+
+</div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
     </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 
-@section Scripts {
-    @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/material.min.js")
-    @Scripts.Render("~/Scripts/table-management.js")
-}
+    @section Scripts {
+        @Scripts.Render("~/Scripts/jquery-ui.js")
+        @Scripts.Render("~/Scripts/material.min.js")
+        @Scripts.Render("~/Scripts/table-management.js")
+    }

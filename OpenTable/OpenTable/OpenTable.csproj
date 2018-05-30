@@ -230,6 +230,7 @@
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Extensions\TablesExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,6 +265,14 @@
     <Compile Include="Migrations\201805241705316_addReservationTime.cs" />
     <Compile Include="Migrations\201805241705316_addReservationTime.Designer.cs">
       <DependentUpon>201805241705316_addReservationTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271916258_changingReservationTimeToReservationDateColumnName.cs" />
+    <Compile Include="Migrations\201805271916258_changingReservationTimeToReservationDateColumnName.Designer.cs">
+      <DependentUpon>201805271916258_changingReservationTimeToReservationDateColumnName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805272008042_changeReservationModel.cs" />
+    <Compile Include="Migrations\201805272008042_changeReservationModel.Designer.cs">
+      <DependentUpon>201805272008042_changeReservationModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -399,6 +408,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805241705316_addReservationTime.resx">
       <DependentUpon>201805241705316_addReservationTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271916258_changingReservationTimeToReservationDateColumnName.resx">
+      <DependentUpon>201805271916258_changingReservationTimeToReservationDateColumnName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805272008042_changeReservationModel.resx">
+      <DependentUpon>201805272008042_changeReservationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

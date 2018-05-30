@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using OpenTable.Extensions;
 using OpenTable.Models;
 using OpenTable.Repositories;
 using OpenTable.ViewModels;
@@ -51,38 +52,48 @@ namespace OpenTable.Controllers
             var restaurant = _unitOfWork.RestaurantRepository.GetById(restaurantId);
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurantId);
 
-            var tablesJson = "[]";
-
-            if (tables.Any())
-                tablesJson = new JavaScriptSerializer()
-                    .Serialize(restaurant.Tables
-                    .Select(s => new { s.Id, s.Left, s.Top, s.RestaurantId }));
-
-            var createReservationVieModel = new CreateReservationViewModel
+            var createReservationViewModel = new CreateReservationViewModel
             {
+                RestaurantId = restaurantId,
                 RestaurantName = restaurant.Name,
-                Tables = tablesJson
+                Tables = tables.ToJson(),
+                ReservationDate = DateTime.Now
             };
 
-            return View(createReservationVieModel);
+            return View(createReservationViewModel);
         }
 
         // POST: Reservations/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ReservingPersonEmail,ReservationTime,TableId")] Reservation reservation)
-        {
+        [HttpPost]        
+        public ActionResult Create([Bind(Include = "ReservingPersonEmail,ReservationDate,RestaurantId,RestaurantName,TableId,Tables")] CreateReservationViewModel reservationViewModel)
+        {            
             if (ModelState.IsValid)
             {
+                var reservation = new Reservation
+                {
+                    ReservationDate = reservationViewModel.ReservationDate,
+                    ReservingPersonEmail = reservationViewModel.ReservingPersonEmail,
+                    TableId = reservationViewModel.TableId
+                };
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Restaurants");
             }
 
-            ViewBag.TableId = new SelectList(db.Tables, "Id", "Id", reservation.TableId);
-            return View(reservation);
+            var restaurant = _unitOfWork.RestaurantRepository.GetById(reservationViewModel.RestaurantId);
+            var tables = _unitOfWork.TableRepository.GetByRestaurantId(reservationViewModel.RestaurantId);
+
+            var createReservationViewModelAgain = new CreateReservationViewModel
+            {
+                RestaurantId = reservationViewModel.RestaurantId,
+                RestaurantName = reservationViewModel.RestaurantName,
+                Tables = tables.ToJson(),
+                ReservationDate = DateTime.Now
+            };
+
+            return View(reservationViewModel);
         }
 
         // GET: Reservations/Edit/5
@@ -106,16 +117,22 @@ namespace OpenTable.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReservingPersonEmail,ReservationTime,TableId")] Reservation reservation)
+        public ActionResult Edit([Bind(Include = "Id,ReservingPersonEmail,ReservationDate,TableId")] CreateReservationViewModel reservationViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reservation).State = EntityState.Modified;
+                var reservation = new Reservation
+                {
+                    ReservationDate = reservationViewModel.ReservationDate,
+                    TableId = reservationViewModel.TableId
+                };
+
+                db.Entry(reservationViewModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TableId = new SelectList(db.Tables, "Id", "Id", reservation.TableId);
-            return View(reservation);
+
+            return View(reservationViewModel);
         }
 
         // GET: Reservations/Delete/5
