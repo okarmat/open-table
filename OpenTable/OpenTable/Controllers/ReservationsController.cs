@@ -89,11 +89,13 @@ namespace OpenTable.Controllers
             {
                 RestaurantId = reservationViewModel.RestaurantId,
                 RestaurantName = reservationViewModel.RestaurantName,
-                Tables = tables.ToJson(),
-                ReservationDate = DateTime.Now
+                ReservingPersonEmail = reservationViewModel.ReservingPersonEmail,
+                ReservationDate = reservationViewModel.ReservationDate,
+                TableId = reservationViewModel.TableId,
+                Tables = tables.ToJson()                
             };
 
-            return View(reservationViewModel);
+            return View(createReservationViewModelAgain);
         }
 
         // GET: Reservations/Edit/5

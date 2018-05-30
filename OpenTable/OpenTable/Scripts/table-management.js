@@ -24,29 +24,33 @@ function initTableReservationView(initialTables) {
         $("#" + element.Id + ".restaurant-table").draggable();
         $("#" + element.Id + ".restaurant-table").css({ 'top': element.Top, 'left': element.Left });
         $("#" + element.Id + ".restaurant-table").click(function () {
-            if (reservedTable !== element.Id && reservedTable !== 0) {
-                alert("Istnieje możliwość rezerwacji tylko jednego stolika.");
+            var tableId = Number($("#TableId").val());
+            //if (tableId !== element.Id && tableId !== 0) {
+            //    alert("Istnieje możliwość rezerwacji tylko jednego stoliku w ramach rezerwacji.");
+            //}
+            //else {
+            //var razorTables = $("#Tables").val();
+            //if (razorTables === "[]") {
+                //$("#Tables").val(tables.stringify);
+//            }
+
+            if (tableId === element.Id) {
+                $("#TableId").val(0);
+                $("#ReserveBtn").prop('disabled', true);
+                $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
+                console.log($("#TableId").val());
+            }
+            else if (tableId === 0) {
+                $("#TableId").val(element.Id);
+                $("#ReserveBtn").prop('disabled', false);
+                $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
+                console.log($("#TableId").val());
             }
             else {
-                if (reservedTable === element.Id) {
-                    reservedTable = 0;
-                    $("#ReserveBtn").prop('disabled', true);
-                }
-                else if (reservedTable === 0) {
-                    reservedTable = element.Id;
-                    $("#ReserveBtn").prop('disabled', false);
-                }
-
-                $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
-            }
-          
-            //else {
-              
-                //$("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
-            //}                            
-            //else {
-            //    
-            //}
+                 alert("Istnieje możliwość rezerwacji tylko jednego stoliku w ramach rezerwacji.");
+             }                
+                
+           // }
         });
     });
 
@@ -63,17 +67,20 @@ function reserve() {
             url: "/Reservations/Create",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: things = JSON.stringify({ 'reservationViewModel': reservation })
-        });
-
-        window.location = '/Restaurants/Index';
+            data: things = JSON.stringify({ 'reservationViewModel': reservation }),
+            complete: function (response) {
+                console.log(response);
+                //window.location = '/Restaurants/Index';
+            }
+        }); 
+        
     }
     else {
         alert("Zaznacz stolik który chcesz zarezerwować.");
     }
 }
 
-  function addTable(restaurantId) {	
+function addTable(restaurantId) {	
     tableMaxId++;
     var table = { Id: tableMaxId, RestaurantId: restaurantId, Left: 0, Top: 0 };
 	tables.push(table);
@@ -82,13 +89,13 @@ function reserve() {
     $(".restaurant-table").on("dragstop", function (event, ui) { 					        
         saveTablePosition(Number($(this).attr("id")), ui.position.left, ui.position.top);
 	});	
-  }
+}
   
-  function saveTablePosition(id, left, top) {
+function saveTablePosition(id, left, top) {
 		var tableIndex = tables.findIndex(t => t.Id === id);
 		tables[tableIndex].Left = left;
         tables[tableIndex].Top = top;
-  }
+}
 
 function saveTablesSet() {
       jQuery.ajax({
@@ -99,9 +106,9 @@ function saveTablesSet() {
           data: things = JSON.stringify({ 'tables': tables })
       });
       window.location = '/Restaurants/Index';
-  }
+}
  
-  function deleteAllTables() {
+function deleteAllTables() {
       if (confirm('Are you sure you want to delete all tables?')) {
           tables.forEach(function (element) {
               var tableIndex = tables.findIndex(t => t.Id === element.Id);
@@ -109,4 +116,4 @@ function saveTablesSet() {
               $("#" + element.Id + ".restaurant-table").remove();
           });	
       } 
-  }
+}
