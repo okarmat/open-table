@@ -17,7 +17,7 @@ namespace OpenTable.Extensions
             {
                 tablesJson = new JavaScriptSerializer()
                     .Serialize(tables
-                    .Select(s => new { s.Id, s.Left, s.Top, s.RestaurantId }));
+                    .Select(s => new { s.Id, s.Left, s.Top, s.RestaurantId, s.Reserved }));
             }
 
             return tablesJson;

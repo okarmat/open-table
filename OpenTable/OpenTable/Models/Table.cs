@@ -15,6 +15,6 @@ namespace OpenTable.Models
         [NotMapped]
         public bool Erase { get; set; }
         [NotMapped]
-        public List<ReservationGap> ReservationGaps { get; set; }
+        public bool Reserved { get; set; }
     }
 }

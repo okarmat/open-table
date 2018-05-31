@@ -230,6 +230,7 @@
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Extensions\ReservationsExtensions.cs" />
     <Compile Include="Extensions\TablesExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

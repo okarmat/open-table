@@ -23,22 +23,28 @@ function initTableReservationView(initialTables) {
         $(".restaurant").append("<div id='" + element.Id + "' class='restaurant-table' class='ui-widget-content'></div>");
         $("#" + element.Id + ".restaurant-table").draggable();
         $("#" + element.Id + ".restaurant-table").css({ 'top': element.Top, 'left': element.Left });
-        $("#" + element.Id + ".restaurant-table").click(function () {
-            var tableId = Number($("#TableId").val());
-            if (tableId === element.Id) {
-                $("#TableId").val(0);
-                $("#ReserveBtn").prop('disabled', true);
-                $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
-            }
-            else if (tableId === 0) {
-                $("#TableId").val(element.Id);
-                $("#ReserveBtn").prop('disabled', false);
-                $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
-            }
-            else {
-                alert("You can reserve only one table for reservation.");
-            }                
-        });
+
+        if (element.Reserved) {
+            $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-someone");
+        }
+        else {
+            $("#" + element.Id + ".restaurant-table").click(function () {
+                var tableId = Number($("#TableId").val());
+                if (tableId === element.Id) {
+                    $("#TableId").val(0);
+                    $("#ReserveBtn").prop('disabled', true);
+                    $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
+                }
+                else if (tableId === 0) {
+                    $("#TableId").val(element.Id);
+                    $("#ReserveBtn").prop('disabled', false);
+                    $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
+                }
+                else {
+                    alert("You can reserve only one table for reservation.");
+                }
+            });
+        }
     });
 
     $(".restaurant-table").draggable("disable");

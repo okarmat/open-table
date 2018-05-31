@@ -53,14 +53,18 @@ namespace OpenTable.Controllers
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurantId);
             var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(restaurantId);
 
-            var reserationStart = DateTime.Now.AddDays(1);
-            var reserationEnd = DateTime.Now.AddDays(1).AddHours(3);
+            var reserationStart = DateTime.Now.AddHours(1);
+            var reserationEnd = DateTime.Now.AddHours(3);
 
             foreach (var table in tables)
             {
-                var reservation = reservations.Where(r => r.TableId == table.Id);
-
-                //table.ReservationStart
+                var reservation = reservations
+                    .Where(r => r.TableId == table.Id 
+                    && ((r.ReservationStart <= reserationStart && r.ReservationEnd >= reserationEnd)
+                    || (r.ReservationStart >= reserationStart && r.ReservationEnd <= reserationEnd)))
+                    .OrderBy(r => r.ReservationEnd)
+                    .ToList();
+                table.Reserved = reservation.Any();
             }
 
             var createReservationViewModel = new CreateReservationViewModel
@@ -97,6 +101,18 @@ namespace OpenTable.Controllers
 
             var restaurant = _unitOfWork.RestaurantRepository.GetById(reservationViewModel.RestaurantId);
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(reservationViewModel.RestaurantId);
+            var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(reservationViewModel.RestaurantId);
+
+            foreach (var table in tables)
+            {
+                var reservation = reservations
+                    .Where(r => r.TableId == table.Id
+                    && ((r.ReservationStart <= reservationViewModel.ReservationStart && r.ReservationEnd >= reservationViewModel.ReservationEnd)
+                    || (r.ReservationStart >= reservationViewModel.ReservationStart && r.ReservationEnd <= reservationViewModel.ReservationEnd)))
+                    .OrderBy(r => r.ReservationEnd)
+                    .ToList();
+                table.Reserved = reservation.Any();
+            }
 
             var createReservationViewModelAgain = new CreateReservationViewModel
             {
@@ -184,12 +200,6 @@ namespace OpenTable.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public void Reserve(Reservation reservation)
-        {
-            _unitOfWork.ReservationRepository.Add(reservation);
-            _unitOfWork.Complete();
         }
     }
 }

@@ -58,3 +58,7 @@ textarea {
 .reserved-by-me {
     border: 4px double #4cff00;
 }
+
+.reserved-by-someone {
+    filter: brightness(50%);
+}
