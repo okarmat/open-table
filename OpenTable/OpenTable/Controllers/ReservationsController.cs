@@ -53,27 +53,18 @@ namespace OpenTable.Controllers
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurantId);
             var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(restaurantId);
 
-            var reserationStart = DateTime.Now.AddHours(1);
-            var reserationEnd = DateTime.Now.AddHours(3);
+            var reservationStart = DateTime.Now.AddHours(1);
+            var reservationEnd = DateTime.Now.AddHours(3);
 
-            foreach (var table in tables)
-            {
-                var reservation = reservations
-                    .Where(r => r.TableId == table.Id 
-                    && ((r.ReservationStart <= reserationStart && r.ReservationEnd >= reserationEnd)
-                    || (r.ReservationStart >= reserationStart && r.ReservationEnd <= reserationEnd)))
-                    .OrderBy(r => r.ReservationEnd)
-                    .ToList();
-                table.Reserved = reservation.Any();
-            }
+            tables.UpdateTablesReservedStatus(reservations, reservationStart, reservationEnd);
 
             var createReservationViewModel = new CreateReservationViewModel
             {
                 RestaurantId = restaurantId,
                 RestaurantName = restaurant.Name,
                 Tables = tables.ToJson(),
-                ReservationStart = reserationStart,
-                ReservationEnd = reserationEnd
+                ReservationStart = reservationStart,
+                ReservationEnd = reservationEnd
             };
 
             return View(createReservationViewModel);
@@ -98,21 +89,11 @@ namespace OpenTable.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Restaurants");
             }
-
-            var restaurant = _unitOfWork.RestaurantRepository.GetById(reservationViewModel.RestaurantId);
+            
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(reservationViewModel.RestaurantId);
             var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(reservationViewModel.RestaurantId);
 
-            foreach (var table in tables)
-            {
-                var reservation = reservations
-                    .Where(r => r.TableId == table.Id
-                    && ((r.ReservationStart <= reservationViewModel.ReservationStart && r.ReservationEnd >= reservationViewModel.ReservationEnd)
-                    || (r.ReservationStart >= reservationViewModel.ReservationStart && r.ReservationEnd <= reservationViewModel.ReservationEnd)))
-                    .OrderBy(r => r.ReservationEnd)
-                    .ToList();
-                table.Reserved = reservation.Any();
-            }
+            tables.UpdateTablesReservedStatus(reservations, reservationViewModel.ReservationStart, reservationViewModel.ReservationEnd);
 
             var createReservationViewModelAgain = new CreateReservationViewModel
             {

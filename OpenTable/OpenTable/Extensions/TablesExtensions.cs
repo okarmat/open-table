@@ -22,5 +22,21 @@ namespace OpenTable.Extensions
 
             return tablesJson;
         }
+
+        public static List<Table> UpdateTablesReservedStatus(this List<Table> tables, List<Reservation> reservations, DateTime reservationStart, DateTime reservationEnd)
+        {
+            foreach (var table in tables)
+            {
+                var reservation = reservations
+                    .Where(r => r.TableId == table.Id
+                    && (r.ReservationStart.Between(reservationStart, reservationEnd) 
+                    || r.ReservationEnd.Between(reservationStart, reservationEnd)))
+                    .OrderBy(r => r.ReservationEnd)
+                    .ToList();
+                table.Reserved = reservation.Any();
+            }
+
+            return tables;
+        }
     }
 }
