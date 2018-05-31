@@ -16,12 +16,12 @@ namespace OpenTable.ViewModels
 
         public string RestaurantName { get; set; }
 
-        [Required]        
+        [Required(ErrorMessage = "Please enter contact email")]        
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [DisplayName("Contact email")]
         public string ReservingPersonEmail { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter reservation date")]
         [DateTimeNextSevenDaysRangeAttributeValidation]
         [DisplayName("Reservation date")]
         public DateTime ReservationDate { get; set; }

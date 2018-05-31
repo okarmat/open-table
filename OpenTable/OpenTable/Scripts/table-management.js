@@ -38,7 +38,7 @@ function initTableReservationView(initialTables) {
                 console.log($("#TableId").val());
             }
             else {
-                alert("Istnieje możliwość rezerwacji tylko jednego stoliku w ramach rezerwacji.");
+                alert("You can reserve only one table for reservation.");
             }                
         });
     });
