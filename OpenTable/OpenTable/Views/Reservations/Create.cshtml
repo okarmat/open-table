@@ -20,7 +20,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ReservationDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.ReservationDate, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local" })
+            @Html.TextBoxFor(model => model.ReservationDate, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local", onfocusout = "updateReservationStatus()" })
             @Html.ValidationMessageFor(model => model.ReservationDate, "", new { @class = "text-danger" })
         </div>
     </div>

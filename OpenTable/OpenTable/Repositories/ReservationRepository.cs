@@ -29,5 +29,10 @@ namespace OpenTable.Repositories
         {
             return _context.Reservations.Where(r => r.ReservingPersonEmail == email).ToList();
         }
+
+        public List<Reservation> GetByRestaurantId(int restaurantId)
+        {
+            return _context.Reservations.Where(r => r.Table.RestaurantId == restaurantId).ToList();
+        }
     }
 }

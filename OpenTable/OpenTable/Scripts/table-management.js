@@ -29,13 +29,11 @@ function initTableReservationView(initialTables) {
                 $("#TableId").val(0);
                 $("#ReserveBtn").prop('disabled', true);
                 $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
-                console.log($("#TableId").val());
             }
             else if (tableId === 0) {
                 $("#TableId").val(element.Id);
                 $("#ReserveBtn").prop('disabled', false);
                 $("#" + element.Id + ".restaurant-table").toggleClass("reserved-by-me");
-                console.log($("#TableId").val());
             }
             else {
                 alert("You can reserve only one table for reservation.");
@@ -44,6 +42,10 @@ function initTableReservationView(initialTables) {
     });
 
     $(".restaurant-table").draggable("disable");
+}
+
+function updateReservationStatus() {
+    console.log("on focus out event");
 }
 
 function addTable(restaurantId) {	

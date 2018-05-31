@@ -11,6 +11,7 @@ namespace OpenTable.Repositories
     {
         void Add(Reservation reservation);
         void Delete(Reservation reservation);
-        List<Reservation> GetByEmail(string email);        
+        List<Reservation> GetByEmail(string email);
+        List<Reservation> GetByRestaurantId(int restaurantId);
     }
 }
