@@ -9,7 +9,7 @@ using System.Web;
 
 namespace OpenTable.ViewModels
 {
-    public class CreateReservationViewModel
+    public class CreateReservationViewModel : IValidatableObject
     {
 
         public int RestaurantId { get; set; }
@@ -21,14 +21,25 @@ namespace OpenTable.ViewModels
         [DisplayName("Contact email")]
         public string ReservingPersonEmail { get; set; }
 
-        [Required(ErrorMessage = "Please enter reservation date")]
+        [Required(ErrorMessage = "Please enter reservation start date")]
         [DateTimeNextSevenDaysRangeAttributeValidation]
-        [DisplayName("Reservation date")]
-        public DateTime ReservationDate { get; set; }
+        [DisplayName("Reservation start")]
+        public DateTime ReservationStart { get; set; }
+
+        [Required(ErrorMessage = "Please enter reservation end date")]
+        [DateTimeNextSevenDaysRangeAttributeValidation]
+        [DisplayName("Reservation end")]
+        public DateTime ReservationEnd { get; set; }
 
         [Required]
         public int TableId { get; set; }
 
-        public string Tables { get; set; }        
+        public string Tables { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (ReservationEnd <= ReservationStart)
+                yield return new ValidationResult("Reservation end date have to be greater then reservation start");
+        }
     }
 }

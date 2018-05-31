@@ -16,7 +16,11 @@ namespace OpenTable.Models
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime ReservationDate { get; set; }
+        public DateTime ReservationStart { get; set; }
+
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime ReservationEnd { get; set; }
 
         public int TableId { get; set; }
 

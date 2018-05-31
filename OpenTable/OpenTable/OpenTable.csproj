@@ -274,12 +274,17 @@
     <Compile Include="Migrations\201805272008042_changeReservationModel.Designer.cs">
       <DependentUpon>201805272008042_changeReservationModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805311324395_addReservationStarAndEndFields.cs" />
+    <Compile Include="Migrations\201805311324395_addReservationStarAndEndFields.Designer.cs">
+      <DependentUpon>201805311324395_addReservationStarAndEndFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\ReservationGap.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -415,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805272008042_changeReservationModel.resx">
       <DependentUpon>201805272008042_changeReservationModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805311324395_addReservationStarAndEndFields.resx">
+      <DependentUpon>201805311324395_addReservationStarAndEndFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

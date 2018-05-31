@@ -18,10 +18,18 @@
     <hr />
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ReservationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.ReservationStart, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.ReservationDate, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local", onfocusout = "updateReservationStatus()" })
-            @Html.ValidationMessageFor(model => model.ReservationDate, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(model => model.ReservationStart, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local", onfocusout = "updateReservationStatus()" })
+            @Html.ValidationMessageFor(model => model.ReservationStart, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReservationEnd, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.ReservationEnd, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local", onfocusout = "updateReservationStatus()" })
+            @Html.ValidationMessageFor(model => model.ReservationEnd, "", new { @class = "text-danger" })
         </div>
     </div>
 

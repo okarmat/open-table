@@ -51,13 +51,25 @@ namespace OpenTable.Controllers
         {
             var restaurant = _unitOfWork.RestaurantRepository.GetById(restaurantId);
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurantId);
+            var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(restaurantId);
+
+            var reserationStart = DateTime.Now.AddDays(1);
+            var reserationEnd = DateTime.Now.AddDays(1).AddHours(3);
+
+            foreach (var table in tables)
+            {
+                var reservation = reservations.Where(r => r.TableId == table.Id);
+
+                //table.ReservationStart
+            }
 
             var createReservationViewModel = new CreateReservationViewModel
             {
                 RestaurantId = restaurantId,
                 RestaurantName = restaurant.Name,
                 Tables = tables.ToJson(),
-                ReservationDate = DateTime.Now.AddDays(1)
+                ReservationStart = reserationStart,
+                ReservationEnd = reserationEnd
             };
 
             return View(createReservationViewModel);
@@ -67,13 +79,14 @@ namespace OpenTable.Controllers
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]        
-        public ActionResult Create([Bind(Include = "ReservingPersonEmail,ReservationDate,RestaurantId,RestaurantName,TableId,Tables")] CreateReservationViewModel reservationViewModel)
+        public ActionResult Create([Bind(Include = "ReservingPersonEmail,ReservationStart,ReservationEnd,RestaurantId,RestaurantName,TableId,Tables")] CreateReservationViewModel reservationViewModel)
         {            
             if (ModelState.IsValid)
             {
                 var reservation = new Reservation
                 {
-                    ReservationDate = reservationViewModel.ReservationDate,
+                    ReservationStart = reservationViewModel.ReservationStart,
+                    ReservationEnd = reservationViewModel.ReservationEnd,
                     ReservingPersonEmail = reservationViewModel.ReservingPersonEmail,
                     TableId = reservationViewModel.TableId
                 };
@@ -90,7 +103,8 @@ namespace OpenTable.Controllers
                 RestaurantId = reservationViewModel.RestaurantId,
                 RestaurantName = reservationViewModel.RestaurantName,
                 ReservingPersonEmail = reservationViewModel.ReservingPersonEmail,
-                ReservationDate = reservationViewModel.ReservationDate,
+                ReservationStart = reservationViewModel.ReservationStart,
+                ReservationEnd = reservationViewModel.ReservationEnd,
                 TableId = reservationViewModel.TableId,
                 Tables = tables.ToJson()                
             };
@@ -125,7 +139,7 @@ namespace OpenTable.Controllers
             {
                 var reservation = new Reservation
                 {
-                    ReservationDate = reservationViewModel.ReservationDate,
+                    //ReservationDate = reservationViewModel.ReservationDate,
                     TableId = reservationViewModel.TableId
                 };
 
