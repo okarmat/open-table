@@ -188,7 +188,7 @@ namespace OpenTable.Controllers
             var tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurantId);
             var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(restaurantId);
 
-            tables.UpdateTablesReservedStatus(reservations, dateStart, dateEnd);
+                tables.UpdateTablesReservedStatus(reservations, dateStart, dateEnd);
 
             return tables.ToJson();
         }

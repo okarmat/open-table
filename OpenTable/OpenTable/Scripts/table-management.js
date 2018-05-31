@@ -51,15 +51,19 @@ function initTableReservationView(initialTables) {
 }
 
 function updateReservationStatus() {
-    console.log("on focus out event");
-
     $.ajax({
         type: 'GET',
         url: '/Reservations/GetTablesWithReservedStatus',
         data: { restaurantId: tables[0].RestaurantId, dateStart: $("#ReservationStart").val(), dateEnd: $("#ReservationEnd").val() },
         dataType: 'json',
         success: function (data) {
-            tables = data;            
+            tables = data;
+            tables.forEach(function (element) {
+                if (element.Reserved)
+                    $("#" + element.Id + ".restaurant-table").addClass("reserved-by-someone");
+                else
+                    $("#" + element.Id + ".restaurant-table").removeClass("reserved-by-someone");
+            });
         }
     });
 }
