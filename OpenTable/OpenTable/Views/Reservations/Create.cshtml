@@ -46,7 +46,7 @@
     @Html.ValidationMessageFor(model => model.TableId, "", new { @class = "text-danger" })
 
     <input id="TableId" name="TableId" value="0" type="hidden" />
-
+ 
     <input id="ReserveBtn" type="submit" value="Reserve" class="btn btn-success" readonly disabled />
     <input id="ReserveBtn" value="Cancel" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Restaurants")'" readonly />
 </div>

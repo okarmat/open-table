@@ -52,6 +52,16 @@ function initTableReservationView(initialTables) {
 
 function updateReservationStatus() {
     console.log("on focus out event");
+
+    $.ajax({
+        type: 'GET',
+        url: '/Reservations/GetTablesWithReservedStatus',
+        data: { restaurantId: tables[0].RestaurantId, dateStart: $("#ReservationStart").val(), dateEnd: $("#ReservationEnd").val() },
+        dataType: 'json',
+        success: function (data) {
+            tables = data;            
+        }
+    });
 }
 
 function addTable(restaurantId) {	

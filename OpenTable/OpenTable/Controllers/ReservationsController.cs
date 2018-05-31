@@ -182,5 +182,15 @@ namespace OpenTable.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public string GetTablesWithReservedStatus(int restaurantId, DateTime dateStart, DateTime dateEnd)
+        {
+            var tables = _unitOfWork.TableRepository.GetByRestaurantId(restaurantId);
+            var reservations = _unitOfWork.ReservationRepository.GetByRestaurantId(restaurantId);
+
+            tables.UpdateTablesReservedStatus(reservations, dateStart, dateEnd);
+
+            return tables.ToJson();
+        }
     }
 }
